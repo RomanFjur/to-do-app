@@ -1,0 +1,39 @@
+.label {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.input {
+  width: 300px;
+  height: 40px;
+  margin: 0;
+  margin-top: 6px;
+  margin-bottom: 40px;
+  padding-left: 16px;
+  color: #333333;
+  font-size: 16px;
+  line-height: 19px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  box-sizing: border-box;
+}
+
+.input:first-of-type {
+  margin-bottom: 20px;
+}
+
+.input::placeholder {
+  color: #c1c1c1;
+}
+
+.inputError {
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16),
+    inset 0 0 0 2px rgba(255, 0, 0, 0.7);
+}
+
+.inputError::placeholder {
+  color: rgba(255, 0, 0, 0.7);
+}

@@ -1,0 +1,21 @@
+.list {
+  display: block;
+  width: 354px;
+  height: 463px;
+  color: #333333;
+  font-size: 16px;
+  line-height: 19px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.emptyList {
+  display: block;
+  margin: 0;
+  margin-top: 222px;
+  margin-left: 55px;
+  color: #333333;
+}
