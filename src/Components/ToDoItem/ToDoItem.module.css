@@ -37,7 +37,7 @@
 }
 
 .tags,
-.timer {
+.time {
   width: 100%;
   font-size: 13px;
   line-height: 16px;
@@ -65,7 +65,8 @@
   background-color: #fff;
 }
 
-.checkboxDiv:hover {
+.checkboxDiv:hover,
+.delete:hover {
   cursor: pointer;
 }
 

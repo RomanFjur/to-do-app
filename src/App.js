@@ -12,12 +12,23 @@ class App extends React.Component {
     todos: [...localStorage.getToDos()]
   }
 
-  setTodos = (todos, name, todo) => {
+  setTodos = (name, todo, todos) => {
     this.setState({
       todos
     });
 
     localStorage.setToDo(name, todo);
+  }
+
+  setTimeInTodo = (index, remain) => {
+    const todosCopy = [...this.state.todos];
+    todosCopy[index].timeRemain = remain;
+
+    this.setState({
+      todos: todosCopy
+    });
+
+    localStorage.setToDo(todosCopy[index].name, todosCopy[index]);
   }
 
   deleteToDo = (index) => {
@@ -45,12 +56,15 @@ class App extends React.Component {
   render () {
     return (
       <div className={styles.body}>
-        <ToDoForm todos={this.state.todos} setTodos={this.setTodos}/>
+        <ToDoForm 
+          todos={this.state.todos} 
+          setTodos={this.setTodos}
+          />
         <HandlersContext.Provider value={this.deleteToDo}>
           <ToDoList
             todos={this.state.todos}
-            localSave={localStorage.setToDo}
-            onMark={this.onMarkAsDone} 
+            onMark={this.onMarkAsDone}
+            setTimeInTodo={this.setTimeInTodo}
           />
         </HandlersContext.Provider>
       </div>

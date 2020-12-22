@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './ToDoItem.module.css';
-import {HandlersContext} from '../../Constants.js';
+import Timer from 'Components/Timer/Timer';
+import {HandlersContext} from 'Constants.js';
 
-function ToDoItem ({name, tags, timer, index, isDone, onMark}) {
+function ToDoItem ({index, name, tags, time, deadline, timeRemain, isDone, onMark, setTimeInTodo}) {
   return (
     <HandlersContext.Consumer>
       {value => 
@@ -12,7 +13,15 @@ function ToDoItem ({name, tags, timer, index, isDone, onMark}) {
           </div>
           <p className={styles.name}>{name}</p>
           <div className={styles.delete} onClick={() => {value(index)}}></div>
-          <p className={styles.timer}>{timer}</p>
+          <Timer 
+            deadline={deadline}
+            timeRemain={timeRemain} 
+            isDone={isDone} 
+            style={styles.time} 
+            setTimeInTodo={setTimeInTodo}
+            index={index}
+            onMark={onMark}
+            />
           <p className={styles.tags}>#{tags.join(' #')}</p>
         </div>
       }

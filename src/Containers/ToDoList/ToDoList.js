@@ -1,5 +1,5 @@
 import React from 'react';
-import ToDoItem from '../../Components/ToDoItem/ToDoItem';
+import ToDoItem from 'Components/ToDoItem/ToDoItem';
 import styles from './ToDoList.module.css';
 
 class ToDoList extends React.Component {
@@ -13,12 +13,15 @@ class ToDoList extends React.Component {
           return (
             <ToDoItem 
               key={item.name} //здесь будут присваиваться id
+              index={index}
               name={item.name} 
-              tags={item.tags} 
-              timer={item.timer} 
-              index={index} 
+              tags={item.tags}
+              deadline={item.deadline}
+              timeRemain={item.timeRemain}
               isDone={item.done}
-              onMark={this.props.onMark}/>
+              onMark={this.props.onMark}
+              setTimeInTodo={this.props.setTimeInTodo}
+              />
           )
         })}
       </div>

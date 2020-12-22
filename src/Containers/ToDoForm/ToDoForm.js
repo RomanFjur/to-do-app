@@ -1,6 +1,7 @@
 import React from 'react';
-import Input from '../../Components/Input/Input';
+import Input from 'Components/Input/Input';
 import styles from './ToDoForm.module.css';
+import moment from 'moment';
 
 class ToDoForm extends React.Component {
   constructor(props) {
@@ -8,8 +9,9 @@ class ToDoForm extends React.Component {
     this.state = {
       name: '',
       tags: '',
-      timer: '',
-      done: false
+      done: false,
+      deadline: '',
+      timeRemain: ['', '', '']
     }
   }
 
@@ -26,22 +28,43 @@ class ToDoForm extends React.Component {
   }
 
   changeTimerHandler = (value) => {
+    let formatedTime = value;
+    
+    for (let index = 0; index < 3; index++) {
+      if (formatedTime.search(/h/gi) === -1) {
+        formatedTime = formatedTime.split(/\s+|,\s+|,+/gi);
+        formatedTime.splice(0, 0, '0h');
+        formatedTime = formatedTime.toString();
+      } else if (formatedTime.search(/m/gi) === -1) {
+        formatedTime = formatedTime.split(/\s+|,\s+|,+/gi);
+        formatedTime.splice(1, 0, '0m');
+        formatedTime = formatedTime.toString();
+      } else if (formatedTime.search(/s/gi) === -1) {
+        formatedTime = formatedTime.split(/\s+|,\s+|,+/gi);
+        formatedTime.splice(2, 0, '0s');
+        formatedTime = formatedTime.toString();
+      };
+    }
+
+    formatedTime = formatedTime.replace(/\D+/gi, ' ').split(' ');
+    formatedTime.splice(formatedTime.length-1, 1);
+
     this.setState({
-      timer: value
+      deadline: moment(moment().add(formatedTime[0], 'H').add(formatedTime[1], 'm').add(formatedTime[2], 's')).format('DD-MM-YYYY HH:mm:ss')
     });
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = async (event) => {
     
     if (this.state.name !== '' && this.state.tags !== '') {
       const {setTodos} = this.props;
-      setTodos([...this.props.todos, this.state], this.state.name, this.state);
+
+      setTodos(this.state.name, this.state, [...this.props.todos, this.state]);
 
       this.setState({
         name: '',
         tags: '',
-        timer: '',
+        deadline: '',
       });
 
       const inputs = document.querySelectorAll('input[type=text]');
@@ -53,7 +76,7 @@ class ToDoForm extends React.Component {
 
   render () {
     return (
-      <form className={styles.form}>
+      <div className={styles.form}>
         <Input 
           name="name"
           onChange={this.changeNameHandler} 
@@ -63,11 +86,11 @@ class ToDoForm extends React.Component {
           onChange={this.changeTagsHandler} 
           placeholder="todo, important, other"/>
         <Input 
-          name="timer"
+          name="time"
           onChange={this.changeTimerHandler}
           placeholder="4m 20s"/>
-        <input className={styles.button} type="submit" value="Create" onClick={this.handleSubmit}/>
-      </form>
+        <button className={styles.button} onClick={this.handleSubmit}>Create</button>
+      </div>
     );
   }
 }
