@@ -17,10 +17,8 @@ class ToDoList extends React.Component {
               name={item.name} 
               tags={item.tags}
               deadline={item.deadline}
-              timeRemain={item.timeRemain}
               isDone={item.done}
               onMark={this.props.onMark}
-              setTimeInTodo={this.props.setTimeInTodo}
             />
           );
         })}

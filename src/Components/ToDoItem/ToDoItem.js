@@ -3,7 +3,7 @@ import styles from './ToDoItem.module.css';
 import Timer from 'Components/Timer/Timer';
 import {HandlersContext} from 'Constants.js';
 
-function ToDoItem ({index, name, tags, time, deadline, timeRemain, isDone, onMark, setTimeInTodo}) {
+function ToDoItem ({index, name, tags, time, deadline, isDone, onMark}) {
   return (
     <HandlersContext.Consumer>
       {value => 
@@ -11,18 +11,15 @@ function ToDoItem ({index, name, tags, time, deadline, timeRemain, isDone, onMar
           <div className={styles.checkboxDiv} onClick={() => onMark(index, isDone)}>
             {isDone && <span className={styles.checkboxSpan}></span>}
           </div>
-          <p className={styles.name}>{name}</p>
+          <p className={isDone ? styles.nameChecked : styles.name}>{name}</p>
           <div className={styles.delete} onClick={() => {value(index)}}></div>
           <Timer 
             deadline={deadline}
-            timeRemain={timeRemain} 
             isDone={isDone} 
-            style={styles.time} 
-            setTimeInTodo={setTimeInTodo}
+            style={isDone ? styles.tagsAndTimeChecked : styles.time}
             index={index}
-            onMark={onMark}
           />
-          <p className={styles.tags}>#{tags.join(' #')}</p>
+          <p className={isDone ? styles.tagsAndTimeChecked : styles.tags}>#{tags.join(' #')}</p>
         </div>
       }
     </HandlersContext.Consumer>
