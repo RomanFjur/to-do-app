@@ -21,8 +21,8 @@ class ToDoList extends React.Component {
               isDone={item.done}
               onMark={this.props.onMark}
               setTimeInTodo={this.props.setTimeInTodo}
-              />
-          )
+            />
+          );
         })}
       </div>
     );

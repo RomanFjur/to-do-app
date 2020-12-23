@@ -5,11 +5,10 @@ function Timer ({deadline, timeRemain, isDone, style, setTimeInTodo, index, onMa
   let [remain, setTime] = useState(timeRemain);
   deadline = moment(deadline, 'DD-MM-YYYY HH:mm:ss').unix();
   // подать endtime и функцию, которая будет триггерить когда время пройдет
-  // Возможно переместить функциональный компонент ранее, для более быстрой загрузки таймера (начинается с пустых значений, что не есть хорошо)
 
   useEffect(() => {
-    const currentDate = moment().unix();
-    let diffTime = deadline - currentDate;
+    const currentTime= moment().unix();
+    let diffTime = deadline - currentTime;
     let duration = moment.duration(diffTime * 1000, 'milliseconds');
     const interval = 1000;
 

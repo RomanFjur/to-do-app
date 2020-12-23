@@ -21,7 +21,7 @@ function ToDoItem ({index, name, tags, time, deadline, timeRemain, isDone, onMar
             setTimeInTodo={setTimeInTodo}
             index={index}
             onMark={onMark}
-            />
+          />
           <p className={styles.tags}>#{tags.join(' #')}</p>
         </div>
       }

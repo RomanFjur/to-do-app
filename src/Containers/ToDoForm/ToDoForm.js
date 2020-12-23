@@ -11,7 +11,7 @@ class ToDoForm extends React.Component {
       tags: '',
       done: false,
       deadline: '',
-      timeRemain: ['', '', '']
+      timeRemain: [0, 0, 0]
     }
   }
 
@@ -55,10 +55,8 @@ class ToDoForm extends React.Component {
   }
 
   handleSubmit = async (event) => {
-    
     if (this.state.name !== '' && this.state.tags !== '') {
       const {setTodos} = this.props;
-
       setTodos(this.state.name, this.state, [...this.props.todos, this.state]);
 
       this.setState({
